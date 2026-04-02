@@ -18,9 +18,6 @@
       --blue-soft: #eef3ff;
       --shadow: 0 20px 60px rgba(10, 42, 107, 0.08);
       --shadow-soft: 0 10px 30px rgba(10, 42, 107, 0.06);
-      --radius-xl: 32px;
-      --radius-lg: 24px;
-      --radius-md: 16px;
       --max: 1180px;
     }
 
@@ -63,7 +60,7 @@
     }
 
     .topbar-inner {
-      min-height: 76px;
+      min-height: 84px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -73,35 +70,38 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
     }
 
     .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
       background: linear-gradient(135deg, #2a74ff 0%, #0a52f5 100%);
       color: #fff;
       display: grid;
       place-items: center;
       font-weight: 900;
-      font-size: 20px;
-      box-shadow: 0 10px 20px rgba(26, 92, 255, 0.25);
+      font-size: 24px;
+      box-shadow: 0 12px 24px rgba(26, 92, 255, 0.26);
+      flex: 0 0 auto;
     }
 
     .brand-copy strong {
       display: block;
-      font-size: 24px;
-      letter-spacing: -0.03em;
-      line-height: 1;
+      font-size: 34px;
+      letter-spacing: -0.05em;
+      line-height: 0.92;
+      font-weight: 900;
     }
 
     .brand-copy span {
       display: block;
-      margin-top: 4px;
-      font-size: 12px;
+      margin-top: 6px;
+      font-size: 13px;
       color: var(--muted);
       line-height: 1;
+      font-weight: 600;
     }
 
     .kobalt-pill {
@@ -115,6 +115,7 @@
       font-size: 13px;
       color: var(--muted);
       box-shadow: var(--shadow-soft);
+      white-space: nowrap;
     }
 
     .kobalt-pill strong {
@@ -124,7 +125,7 @@
     }
 
     .hero {
-      padding: 64px 0 36px;
+      padding: 64px 0 28px;
     }
 
     .eyebrow {
@@ -150,40 +151,37 @@
     }
 
     h1 {
-      margin: 24px 0 0;
-      font-size: clamp(50px, 7vw, 82px);
+      margin: 26px 0 0;
+      font-size: clamp(52px, 7vw, 88px);
       line-height: 0.94;
-      letter-spacing: -0.06em;
+      letter-spacing: -0.065em;
       font-weight: 900;
-      max-width: 950px;
+      max-width: 760px;
     }
 
     .hero-sub {
-      margin: 26px 0 0;
-      max-width: 920px;
+      margin: 18px 0 0;
+      max-width: 760px;
       color: var(--text);
-      font-size: clamp(24px, 3vw, 34px);
-      line-height: 1.22;
-      letter-spacing: -0.035em;
-      font-weight: 800;
+      font-size: clamp(28px, 3.4vw, 42px);
+      line-height: 1.06;
+      letter-spacing: -0.05em;
+      font-weight: 850;
     }
 
-    .hero-sub .muted-tail {
-      display: block;
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 19px;
-      line-height: 1.65;
-      letter-spacing: 0;
-      font-weight: 500;
+    .hero-body {
+      margin: 24px 0 0;
       max-width: 760px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.75;
     }
 
     .button-row {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-top: 32px;
+      margin-top: 34px;
     }
 
     .btn {
@@ -193,7 +191,6 @@
       min-height: 54px;
       padding: 0 22px;
       border-radius: 14px;
-      text-decoration: none;
       font-weight: 750;
       font-size: 15px;
       border: 1px solid transparent;
@@ -223,7 +220,7 @@
     }
 
     .section {
-      padding: 48px 0;
+      padding: 52px 0;
     }
 
     .section-alt {
@@ -467,7 +464,17 @@
       }
 
       .topbar-inner {
-        min-height: 70px;
+        min-height: 74px;
+      }
+
+      .brand-mark {
+        width: 46px;
+        height: 46px;
+        font-size: 22px;
+      }
+
+      .brand-copy strong {
+        font-size: 30px;
       }
 
       .kobalt-pill {
@@ -475,10 +482,10 @@
       }
 
       .hero {
-        padding-top: 40px;
+        padding-top: 42px;
       }
 
-      .hero-sub .muted-tail,
+      .hero-body,
       .section-intro,
       .bonus p,
       .final-cta p {
@@ -529,16 +536,14 @@
           <span>For artists and producers considering a move from Songtrust</span>
         </div>
 
-        <h1>
-          Ready to move on from Songtrust?<br />
-          Moving to KOSIGN is easier than you think.
-        </h1>
+        <h1>Ready to leave Songtrust?</h1>
 
         <div class="hero-sub">
+          A better publishing admin experience starts here.
+        </div>
+
+        <div class="hero-body">
           More writers than ever are moving to KOSIGN for stronger collections, better support, and full transparency.
-          <span class="muted-tail">
-            KOSIGN is built on Kobalt’s world-class publishing infrastructure and designed for songwriters who want more from their admin partner.
-          </span>
         </div>
 
         <div class="button-row">

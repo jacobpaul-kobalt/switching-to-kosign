@@ -1,213 +1,766 @@
-export default function KosignSongtrustSwitchPage() {
-  const quotes = [
-    {
-      text: "I moved my entire catalog from Songtrust in May 2025. In less than one year on KOSIGN, I’ve already noticed 4x collections on songs I delivered to Songtrust years ago.",
-      author: "Ethan Ross",
-      role: "Producer",
-    },
-    {
-      text: "At Songtrust, it often took 2+ weeks to get an answer back on a question. At KOSIGN, I often hear back the same day.",
-      author: "KOSIGN Writer",
-      role: "Artist / Producer",
-    },
-    {
-      text: "Switching was much easier than I thought. The KOSIGN team helped me move my catalog over quickly and easily.",
-      author: "KOSIGN Writer",
-      role: "Songwriter",
-    },
-  ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Switching to KOSIGN</title>
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --surface: rgba(255, 255, 255, 0.84);
+      --surface-solid: #ffffff;
+      --text: #0a2a6b;
+      --muted: #5e6f9e;
+      --line: #dfe7f5;
+      --blue: #1a5cff;
+      --blue-dark: #0a2a6b;
+      --blue-soft: #eef3ff;
+      --shadow: 0 20px 60px rgba(10, 42, 107, 0.08);
+      --shadow-soft: 0 12px 30px rgba(10, 42, 107, 0.06);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1180px;
+    }
 
-  const reasons = [
-    {
-      title: "More money",
-      body: "KOSIGN is built on Kobalt’s world-class collections infrastructure, allowing us to collect more directly from streaming services in more places.",
-    },
-    {
-      title: "Better service",
-      body: "Unlike other platforms, KOSIGN is highly selective. That means faster responses and real support.",
-    },
-    {
-      title: "Full transparency",
-      body: "See your earnings and registrations in real time.",
-    },
-  ];
+    * {
+      box-sizing: border-box;
+    }
 
-  const steps = [
-    "Apply to KOSIGN here. The application takes 3–4 minutes.",
-    "If accepted, you can set up your KOSIGN portal quickly and without paying any fee. Our team will help every step of the way.",
-    "Reach out to Songtrust to let them know you’re terminating and request a Letter of Relinquishment.",
-    "Share the Letter of Relinquishment with KOSIGN support and your onboarding manager.",
-    "The KOSIGN team will do the rest, helping ensure your songs are registered with absolutely zero disruption or gap in your collections.",
-  ];
+    html {
+      scroll-behavior: smooth;
+    }
 
-  return (
-    <div className="min-h-screen bg-[#f7f9fc] text-[#0a2a6b]">
-      <header className="sticky top-0 z-40 border-b border-[#e3e9f6] bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-          <div className="flex items-center gap-4">
-            <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#1a5cff] text-white font-black shadow-sm">
-              K
-            </div>
-            <div>
-              <div className="text-[1.4rem] font-black tracking-[-0.03em]">KOSIGN</div>
-              <div className="text-xs text-[#5c6fa3]">Powered by Kobalt</div>
-            </div>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(26, 92, 255, 0.10), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(10, 42, 107, 0.08), transparent 24%),
+        linear-gradient(180deg, #f8faff 0%, #f5f7fb 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(255, 255, 255, 0.82);
+      border-bottom: 1px solid rgba(223, 231, 245, 0.9);
+    }
+
+    .topbar-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #2a74ff 0%, #0a52f5 100%);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 20px;
+      box-shadow: 0 10px 20px rgba(26, 92, 255, 0.25);
+    }
+
+    .brand-copy {
+      line-height: 1.05;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 24px;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 3px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .kobalt-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 13px;
+      color: var(--muted);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .kobalt-pill strong {
+      color: var(--blue-dark);
+      font-size: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero {
+      padding: 56px 0 34px;
+    }
+
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    .hero-left {
+      padding: 20px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 15px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--blue);
+      box-shadow: 0 0 0 6px rgba(26, 92, 255, 0.12);
+    }
+
+    h1 {
+      margin: 22px 0 0;
+      font-size: clamp(48px, 7vw, 78px);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+      font-weight: 900;
+      max-width: 820px;
+    }
+
+    .hero-sub {
+      margin: 22px 0 0;
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 21px;
+      line-height: 1.65;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2a74ff 0%, #1a5cff 100%);
+      color: white;
+      box-shadow: 0 16px 34px rgba(26, 92, 255, 0.24);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.92);
+      border-color: var(--line);
+      color: var(--blue-dark);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-soft {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .hero-right {
+      position: relative;
+    }
+
+    .hero-panel {
+      height: 100%;
+      min-height: 420px;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.22), transparent 30%),
+        linear-gradient(145deg, #0a2a6b 0%, #1243a3 48%, #1a5cff 100%);
+      color: white;
+      padding: 30px;
+      box-shadow: 0 28px 80px rgba(10, 42, 107, 0.18);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -90px -100px auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      filter: blur(2px);
+    }
+
+    .panel-label {
+      display: inline-block;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .panel-title {
+      margin-top: 22px;
+      font-size: 34px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+      max-width: 360px;
+    }
+
+    .panel-grid {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .mini-card {
+      border-radius: 20px;
+      padding: 18px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+    }
+
+    .mini-card.dark {
+      background: rgba(5, 19, 57, 0.32);
+    }
+
+    .mini-card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: rgba(255,255,255,0.7);
+      font-weight: 700;
+    }
+
+    .mini-card-title {
+      margin-top: 8px;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .mini-card-copy {
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .section {
+      padding: 42px 0;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 50px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+      max-width: 900px;
+    }
+
+    .section-intro {
+      margin: 16px 0 0;
+      max-width: 760px;
+      font-size: 20px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 28px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(223, 231, 245, 0.92);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(8px);
+    }
+
+    .reason-card h3 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .reason-card p {
+      margin: 16px 0 0;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .quote-card {
+      position: relative;
+      padding-top: 34px;
+    }
+
+    .quote-mark {
+      position: absolute;
+      top: 18px;
+      left: 24px;
+      font-size: 46px;
+      line-height: 1;
+      color: rgba(26, 92, 255, 0.18);
+      font-weight: 900;
+    }
+
+    .quote-card p {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    .quote-meta {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid #e7edf8;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .quote-meta strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .how-wrap {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .steps {
+      display: grid;
+      gap: 16px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 18px;
+      align-items: start;
+      background: rgba(255,255,255,0.86);
+      border: 1px solid rgba(223, 231, 245, 0.92);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .step-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #2a74ff 0%, #1a5cff 100%);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      font-weight: 900;
+      box-shadow: 0 12px 24px rgba(26, 92, 255, 0.22);
+    }
+
+    .step-copy {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--text);
+    }
+
+    .bonus {
+      background:
+        radial-gradient(circle at top right, rgba(26, 92, 255, 0.10), transparent 26%),
+        linear-gradient(180deg, #f2f6ff 0%, #ffffff 100%);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .bonus h2 {
+      max-width: none;
+    }
+
+    .bonus p {
+      max-width: 820px;
+      font-size: 20px;
+    }
+
+    .final-cta {
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.10), transparent 28%),
+        linear-gradient(145deg, #071f4f 0%, #0a2a6b 56%, #1142a2 100%);
+      color: white;
+      border-radius: 34px;
+      padding: 54px 34px;
+      text-align: center;
+      box-shadow: 0 30px 90px rgba(10, 42, 107, 0.20);
+    }
+
+    .final-cta h2 {
+      max-width: none;
+      color: white;
+    }
+
+    .final-cta p {
+      max-width: 760px;
+      margin: 16px auto 0;
+      color: rgba(255,255,255,0.76);
+      font-size: 21px;
+    }
+
+    .final-cta .btn {
+      margin-top: 28px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-wrap,
+      .how-wrap,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        width: min(var(--max), calc(100% - 28px));
+      }
+
+      .topbar-inner {
+        min-height: 70px;
+      }
+
+      .kobalt-pill {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 38px;
+      }
+
+      .hero-sub,
+      .section-intro,
+      .bonus p,
+      .final-cta p {
+        font-size: 18px;
+      }
+
+      .card,
+      .bonus,
+      .final-cta,
+      .hero-panel {
+        padding: 24px;
+      }
+
+      .step {
+        grid-template-columns: 52px 1fr;
+        padding: 18px;
+      }
+
+      .step-num {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">K</div>
+        <div class="brand-copy">
+          <strong>KOSIGN</strong>
+          <span>Powered by Kobalt</span>
+        </div>
+      </div>
+      <div class="kobalt-pill">
+        <span>Powered by</span>
+        <strong>Kobalt</strong>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-wrap">
+        <div class="hero-left">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            <span>For artists and producers considering a move from Songtrust</span>
           </div>
-          <div className="hidden items-center gap-3 md:flex">
-            <div className="text-xs font-semibold uppercase tracking-[0.16em] text-[#5c6fa3]">Powered by</div>
-            <div className="rounded-full border border-[#d8e2f6] bg-[#f1f5ff] px-4 py-2 text-sm font-bold text-[#0a2a6b]">
-              Kobalt
+
+          <h1>
+            Ready to move on from Songtrust?<br />
+            Moving to KOSIGN is easier than you think.
+          </h1>
+
+          <p class="hero-sub">
+            More writers than ever are moving to KOSIGN for stronger collections, better support, and full transparency.
+          </p>
+
+          <div class="button-row">
+            <a href="#how" class="btn btn-primary">How do I switch?</a>
+            <a href="#" class="btn btn-secondary">Apply to KOSIGN</a>
+            <a href="#bonus" class="btn btn-soft">Signing bonus</a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-panel">
+            <div class="panel-label">Powered by Kobalt</div>
+            <div class="panel-title">World-class publishing admin, made more flexible.</div>
+
+            <div class="panel-grid">
+              <div class="mini-card dark">
+                <div class="mini-card-label">Collections</div>
+                <div class="mini-card-title">More direct</div>
+                <div class="mini-card-copy">Built to collect more directly from streaming services in more places.</div>
+              </div>
+
+              <div class="mini-card">
+                <div class="mini-card-label">Service</div>
+                <div class="mini-card-title">Selective</div>
+                <div class="mini-card-copy">A highly selective platform means faster responses and real support.</div>
+              </div>
+
+              <div class="mini-card" style="grid-column: 1 / -1;">
+                <div class="mini-card-label">Transparency</div>
+                <div class="mini-card-title">When we see it, you see it</div>
+                <div class="mini-card-copy">Real-time visibility into registrations and earnings, all in one place.</div>
+              </div>
             </div>
           </div>
         </div>
-      </header>
+      </div>
+    </section>
 
-      <main>
-        <section className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(26,92,255,0.16),_transparent_34%),radial-gradient(circle_at_bottom_right,_rgba(10,42,107,0.12),_transparent_32%)]" />
-          <div className="mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-[1.05fr_.95fr] lg:px-10 lg:py-24">
-            <div className="relative z-10 max-w-3xl">
-              <div className="inline-flex rounded-full border border-[#d7e1f5] bg-white px-4 py-2 text-sm font-semibold text-[#5c6fa3] shadow-sm">
-                For artists and producers considering a move from Songtrust
-              </div>
-              <h1 className="mt-6 text-5xl font-black leading-[0.96] tracking-[-0.045em] md:text-7xl">
-                Leaving Songtrust?
-                <br />
-                Switching to KOSIGN is simpler than you think.
-              </h1>
+    <section class="section">
+      <div class="container">
+        <h2>Why artists and producers are switching to KOSIGN</h2>
+        <p class="section-intro">
+          The difference comes down to more money, better service, and full transparency.
+        </p>
 
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5c6fa3] md:text-xl">
-                More writers than ever are moving to KOSIGN for stronger collections, better support, and full transparency.
-              </p>
-
-              <div className="mt-8 flex flex-wrap gap-4">
-                <a href="#how" className="rounded-xl bg-[#1a5cff] px-6 py-4 font-semibold text-white shadow-[0_12px_30px_rgba(26,92,255,0.22)] transition hover:-translate-y-0.5">
-                  How do I switch?
-                </a>
-                <a href="#" className="rounded-xl border border-[#d6def3] bg-white px-6 py-4 font-semibold shadow-sm transition hover:-translate-y-0.5">
-                  Apply to KOSIGN
-                </a>
-                <a href="#bonus" className="rounded-xl bg-[#eef3ff] px-6 py-4 font-semibold text-[#1a5cff] transition hover:-translate-y-0.5">
-                  Signing bonus
-                </a>
-              </div>
-            </div>
-
-            <div className="relative z-10 flex items-stretch">
-              <div className="w-full rounded-[2rem] border border-[#dce5f6] bg-white p-8 shadow-[0_24px_70px_rgba(10,42,107,0.08)]">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-sm font-semibold uppercase tracking-[0.16em] text-[#5c6fa3]">World-class infrastructure</div>
-                    <div className="mt-2 text-3xl font-black tracking-[-0.03em]">Powered by Kobalt</div>
-                  </div>
-                  <div className="rounded-full bg-[#eef3ff] px-4 py-2 text-sm font-bold text-[#1a5cff]">Premium admin</div>
-                </div>
-                <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-2xl bg-[#0a2a6b] p-6 text-white">
-                    <div className="text-sm uppercase tracking-[0.16em] text-white/70">Collections</div>
-                    <div className="mt-3 text-2xl font-black">More direct</div>
-                    <div className="mt-2 text-sm leading-7 text-white/75">Built to collect more directly from streaming services in more places.</div>
-                  </div>
-                  <div className="rounded-2xl bg-[#eef3ff] p-6">
-                    <div className="text-sm uppercase tracking-[0.16em] text-[#5c6fa3]">Support</div>
-                    <div className="mt-3 text-2xl font-black">Highly selective</div>
-                    <div className="mt-2 text-sm leading-7 text-[#5c6fa3]">A selective platform means faster responses and real support.</div>
-                  </div>
-                  <div className="rounded-2xl bg-[#eef3ff] p-6 sm:col-span-2">
-                    <div className="text-sm uppercase tracking-[0.16em] text-[#5c6fa3]">Transparency</div>
-                    <div className="mt-3 text-2xl font-black">When we see it, you see it</div>
-                    <div className="mt-2 text-sm leading-7 text-[#5c6fa3]">Real-time visibility into registrations and earnings, all in one place.</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-10">
-          <div className="max-w-3xl">
-            <h2 className="text-4xl font-black tracking-[-0.03em] md:text-5xl">
-              Why artists and producers are switching to KOSIGN
-            </h2>
-            <p className="mt-4 text-lg leading-8 text-[#5c6fa3]">
-              The difference comes down to more money, better service, and full transparency.
+        <div class="grid-3">
+          <div class="card reason-card">
+            <h3>More money</h3>
+            <p>
+              KOSIGN is built on Kobalt’s world-class collections infrastructure, allowing us to collect more directly from streaming services in more places.
             </p>
           </div>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
-            {reasons.map((item) => (
-              <div key={item.title} className="rounded-[1.5rem] border border-[#e3e9f6] bg-white p-7 shadow-sm">
-                <h3 className="text-2xl font-bold tracking-[-0.02em]">{item.title}</h3>
-                <p className="mt-4 text-base leading-8 text-[#5c6fa3]">{item.body}</p>
-              </div>
-            ))}
+          <div class="card reason-card">
+            <h3>Better service</h3>
+            <p>
+              KOSIGN is highly selective. That means faster responses and real support.
+            </p>
           </div>
-        </section>
 
-        <section className="mx-auto max-w-7xl px-6 pb-20 lg:px-10">
-          <div className="grid gap-6 lg:grid-cols-3">
-            {quotes.map((quote) => (
-              <div key={quote.text} className="rounded-[1.75rem] border border-[#dce5f6] bg-white p-8 shadow-sm">
-                <div className="text-4xl leading-none text-[#1a5cff]">“</div>
-                <p className="mt-4 text-lg leading-8 text-[#0a2a6b]">{quote.text}</p>
-                <div className="mt-6 border-t border-[#e8edf8] pt-4">
-                  <div className="font-semibold">{quote.author}</div>
-                  <div className="text-sm text-[#5c6fa3]">{quote.role}</div>
-                </div>
-              </div>
-            ))}
+          <div class="card reason-card">
+            <h3>Full transparency</h3>
+            <p>
+              See your earnings and registrations in real time.
+            </p>
           </div>
-        </section>
+        </div>
+      </div>
+    </section>
 
-        <section id="how" className="mx-auto max-w-7xl px-6 pb-20 lg:px-10">
-          <div className="grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
-            <div>
-              <h2 className="text-4xl font-black tracking-[-0.03em] md:text-5xl">How to switch</h2>
-              <p className="mt-4 text-lg leading-8 text-[#5c6fa3]">
-                The process is straightforward, and the KOSIGN team will help every step of the way.
-              </p>
-            </div>
-            <div className="grid gap-4">
-              {steps.map((step, index) => (
-                <div key={step} className="grid gap-4 rounded-[1.5rem] border border-[#e3e9f6] bg-white p-6 shadow-sm md:grid-cols-[64px_1fr] md:items-start">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#1a5cff] text-lg font-black text-white">
-                    {index + 1}
-                  </div>
-                  <div className="text-base leading-8 text-[#0a2a6b]">{step}</div>
-                </div>
-              ))}
+    <section class="section" style="padding-top: 10px;">
+      <div class="container">
+        <div class="grid-3">
+          <div class="card quote-card">
+            <div class="quote-mark">“</div>
+            <p>
+              I moved my entire catalog from Songtrust in May 2025. In less than one year on KOSIGN, I’ve already noticed 4x collections on songs I delivered to Songtrust years ago.
+            </p>
+            <div class="quote-meta">
+              <strong>Ethan Ross</strong>
+              Producer
             </div>
           </div>
-        </section>
 
-        <section id="bonus" className="mx-auto max-w-7xl px-6 pb-20 lg:px-10">
-          <div className="rounded-[2rem] border border-[#dce5f6] bg-gradient-to-br from-[#eef3ff] to-white p-10 shadow-[0_20px_60px_rgba(10,42,107,0.06)]">
-            <h2 className="text-3xl font-black tracking-[-0.03em] md:text-4xl">
-              Making $10k+ per year on Songtrust?
-            </h2>
-            <p className="mt-4 max-w-3xl text-lg leading-8 text-[#5c6fa3]">
-              Submit your last 4 quarters of Songtrust statements to see if you qualify for a KOSIGN signing bonus.
+          <div class="card quote-card">
+            <div class="quote-mark">“</div>
+            <p>
+              At Songtrust, it often took 2+ weeks to get an answer back on a question. At KOSIGN, I often hear back the same day.
             </p>
-            <a href="#" className="mt-8 inline-block rounded-xl bg-[#1a5cff] px-6 py-4 text-white font-semibold shadow-[0_12px_30px_rgba(26,92,255,0.22)] transition hover:-translate-y-0.5">
-              Submit statements
-            </a>
+            <div class="quote-meta">
+              <strong>KOSIGN Writer</strong>
+              Artist / Producer
+            </div>
           </div>
-        </section>
 
-        <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-10">
-          <div className="rounded-[2rem] bg-[#0a2a6b] p-12 text-center text-white shadow-[0_24px_80px_rgba(10,42,107,0.16)]">
-            <h2 className="text-4xl font-black tracking-[-0.03em] md:text-5xl">
-              Apply to KOSIGN
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-white/75">
-              World-class publishing admin. Full flexibility. Built for songwriters who want more.
+          <div class="card quote-card">
+            <div class="quote-mark">“</div>
+            <p>
+              Switching was much easier than I thought. The KOSIGN team helped me move my catalog over quickly and easily.
             </p>
-            <a href="#" className="mt-8 inline-block rounded-xl bg-white px-6 py-4 font-semibold text-[#0a2a6b] shadow-sm transition hover:-translate-y-0.5">
-              Apply now
-            </a>
+            <div class="quote-meta">
+              <strong>KOSIGN Writer</strong>
+              Songwriter
+            </div>
           </div>
-        </section>
-      </main>
-    </div>
-  );
-}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="container how-wrap">
+        <div>
+          <h2>How to switch</h2>
+          <p class="section-intro">
+            The process is straightforward, and the KOSIGN team will help every step of the way.
+          </p>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-copy">
+              Apply to KOSIGN here. The application takes 3–4 minutes.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-copy">
+              If accepted, you can set up your KOSIGN portal quickly and without paying any fee. Our team will help every step of the way.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-copy">
+              Reach out to Songtrust to let them know you’re terminating and request a Letter of Relinquishment.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-copy">
+              Share the Letter of Relinquishment with KOSIGN support and your onboarding manager.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-copy">
+              The KOSIGN team will do the rest, helping ensure your songs are registered with absolutely zero disruption or gap in your collections.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="bonus">
+      <div class="container">
+        <div class="bonus">
+          <h2>Making $10k+ per year on Songtrust?</h2>
+          <p>
+            Submit your last 4 quarters of Songtrust statements to see if you qualify for a KOSIGN signing bonus.
+          </p>
+          <div class="button-row" style="margin-top: 18px;">
+            <a href="#" class="btn btn-primary">Submit statements</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 8px; padding-bottom: 70px;">
+      <div class="container">
+        <div class="final-cta">
+          <h2>Apply to KOSIGN</h2>
+          <p>
+            World-class publishing admin. Full flexibility. Built for songwriters who want more.
+          </p>
+          <a href="#" class="btn btn-secondary" style="background: white;">Apply now</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

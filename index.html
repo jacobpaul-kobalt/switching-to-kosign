@@ -103,8 +103,16 @@
     }
     .proof-card .kicker{margin-bottom:18px}
     .proof-list{display:grid;gap:6px}
-    .proof-row{display:flex;align-items:center;gap:16px;padding:12px 0}
+    .proof-row{
+      display:flex;align-items:center;gap:16px;
+      padding:12px 10px;margin:0 -10px;
+      border-radius:12px;color:inherit;
+      transition:background .15s ease;
+    }
+    .proof-row:hover{background:var(--blue-soft)}
+    .proof-row:hover .who{color:var(--blue)}
     .proof-row + .proof-row{border-top:1px solid var(--line)}
+    .proof-row + .proof-row:hover{border-top-color:transparent}
     .proof-row .who{font-size:18px;font-weight:850;letter-spacing:-.02em}
     .proof-row .switch-badge{margin-top:5px}
     .proof-row .avatar{border-color:rgba(10,42,107,.10);box-shadow:none}
@@ -406,27 +414,27 @@
      <aside class="proof-card">
        <span class="kicker">Writers who made the move</span>
        <div class="proof-list">
-         <div class="proof-row">
+         <a class="proof-row" href="#proof">
            <div class="avatar ph-ethan-sq" role="img" aria-label="Portrait of Ethan Ross"></div>
            <div>
              <div class="who">Ethan Ross</div>
              <span class="switch-badge switch-badge--light">Switched from Songtrust to <b>KOSIGN</b></span>
            </div>
-         </div>
-         <div class="proof-row">
+         </a>
+         <a class="proof-row" href="#proof">
            <div class="avatar ph-chris" role="img" aria-label="Portrait of Chris Mazuera"></div>
            <div>
              <div class="who">Chris Mazuera</div>
              <span class="switch-badge switch-badge--light">Switched from Songtrust to <b>KOSIGN</b></span>
            </div>
-         </div>
-         <div class="proof-row">
+         </a>
+         <a class="proof-row" href="#proof">
            <div class="avatar ph-phix" role="img" aria-label="Portrait of Phix"></div>
            <div>
              <div class="who">Phix</div>
              <span class="switch-badge switch-badge--light">Switched from Songtrust to <b>KOSIGN</b></span>
            </div>
-         </div>
+         </a>
        </div>
        <div class="proof-foot">
          <a href="#proof">Read what they said &rarr;</a>
